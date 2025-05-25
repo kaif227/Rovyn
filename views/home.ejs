@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/style2.css" />
+</head>
+<body>
+    <%- include('includes/boiler.ejs') %>
+
+    <h1>Welcome on my site</h1>
+    <h2>Total Users Enrolled: <%= users.length %></h2>
+
+    <div class="user-container">
+        <% for(let i = 0; i < users.length; i++) { %>
+            <div class="user">
+                <h4>User <%= i + 1 %></h4>
+                <h3>User ID: <%= users[i]._id %></h3>
+                <h3>User Name: <%= users[i].name %></h3>
+                <h3>User Email: <%= users[i].email %></h3>
+                <form method="GET" action="/home/edit/<%= users[i]._id %>">
+                    <button type="submit" class="editBtn">Edit</button>
+                </form>
+                <form method="POST" action="/home/delete/<%= users[i]._id %>?_method=DELETE">
+                    <button type="submit" class="delBtn">Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+
+  
+</body>
+</html>
+

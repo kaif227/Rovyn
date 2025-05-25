@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Register - Rovyn Ticket Booking</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #362f78;
+}
+
+.register-container {
+  background: #fff;
+  width: 400px;
+  max-width: 100%;
+  padding: 50px 45px 70px;
+  border-radius: 15px;
+  box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+  animation: slideFadeIn 1s ease forwards;
+  position: relative;
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-container::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at center, #8265f5, #5537a6);
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.65;
+  animation: pulseGlow 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.65;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+h2 {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 35px;
+  color: #362f78;
+  letter-spacing: 1.2px;
+  user-select: none;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+  width: 100%;
+  padding: 14px 14px 14px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 2.5px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  color: #362f78;
+  font-weight: 500;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus {
+  border-color: #764ba2;
+}
+
+label {
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  color: #999;
+  font-weight: 500;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.3s ease all;
+  user-select: none;
+}
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
+  top: -10px;
+  left: 8px;
+  font-size: 12px;
+  color: #764ba2;
+  background: white;
+  padding: 0 5px;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  transition: background 0.4s ease;
+  user-select: none;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #5537a6, #4a3592);
+  box-shadow: 0 10px 25px rgba(85, 55, 166, 0.8);
+}
+
+.show-password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 14px;
+  color: #764ba2;
+  user-select: none;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  padding: 0;
+  line-height: 1;
+}
+
+.error-message {
+  color: #d93025;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  font-weight: 600;
+  user-select: none;
+  display: none;
+}
+
+@media (max-width: 450px) {
+  .register-container {
+    width: 100%;
+    padding: 40px 30px 60px;
+  }
+}
+</style>
+</head>
+<body>
+  <main>
+    <section class="register-container" aria-label="Register form for Rovyn ticket booking">
+      <h2>Create Your Account</h2>
+      <form id="registerForm" novalidate  action="/register" method="POST">
+        <div class="form-group">
+          <input type="text" id="name" name="name" placeholder=" " required autocomplete="name" aria-describedby="errorName" />
+          <label for="name">Full Name</label>
+          <div class="error-message" id="errorName">Please enter your full name.</div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" placeholder=" " required autocomplete="email" aria-describedby="errorEmail" />
+          <label for="email">Email Address</label>
+          <div class="error-message" id="errorEmail">Please enter a valid email address.</div>
+        </div>
+        <div class="form-group">
+          <input type="tel" id="phone" name="phone" placeholder=" " required autocomplete="tel" aria-describedby="errorPhone" pattern="^\+?[0-9\s\-]{7,15}$" />
+          <label for="phone">Phone Number</label>
+          <div class="error-message" id="errorPhone">Please enter a valid phone number.</div>
+        </div>
+        <div class="form-group" style="position:relative;">
+          <input type="password" id="password" name="password" placeholder=" " required aria-describedby="errorPassword" />
+          <label for="password">Password</label>
+          
+          <div class="error-message" id="errorPassword">Password must be at least 8 characters.</div>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </section>
+  </main>
+  <script>
+    const registerForm = document.getElementById('registerForm');
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePasswordBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePasswordBtn.textContent = 'Hide';
+      } else {
+        passwordInput.type = 'password';
+        togglePasswordBtn.textContent = 'Show';
+      }
+    });
+
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      let isValid = true;
+
+      // Name validation
+      const name = registerForm.name.value.trim();
+      const errorName = document.getElementById('errorName');
+      if (!name) {
+        errorName.style.display = 'block';
+        isValid = false;
+      } else {
+        errorName.style.display = 'none';
+      }
+
+      // Email validation
+      const email = registerForm.email.value.trim();
+      const errorEmail = document.getElementById('errorEmail');
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailPattern.test(email)) {
+        errorEmail.style.display = 'block';
+        isValid = false;
+      } else {
+        errorEmail.style.display = 'none';
+      }
+
+      // Phone validation
+      const phone = registerForm.phone.value.trim();
+      const errorPhone = document.getElementById('errorPhone');
+      const phonePattern = /^\+?[0-9\s\-]{7,15}$/;
+      if (!phone || !phonePattern.test(phone)) {
+        errorPhone.style.display = 'block';
+        isValid = false;
+      } else {
+        errorPhone.style.display = 'none';
+      }
+
+     
+
+    });
+  </script>
+</body>
+</html>
+

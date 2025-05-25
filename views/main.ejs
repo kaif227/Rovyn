@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rovyn - Ticket Booking Home</title>
+<link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+  
+<%-include('includes/boiler.ejs')%>
+
+<main role="main" tabindex="0" aria-label="Rovyn ticket booking main page">
+  <h1 class="hero-title">Book Your Tickets Effortlessly</h1>
+  <p class="hero-subtitle">Discover events, concerts, travel & more</p>
+
+  <form class="search-form" aria-label="Ticket search form" id="searchForm">
+    <input type="text" name="destination" placeholder="Search destination or event" class="search-input" aria-label="Destination or Event" autocomplete="off" required />
+    <input type="date" name="date" class="search-input" aria-label="Select date" required min="" />
+    <select name="category" class="search-select" aria-label="Select category">
+      <option value="" disabled selected>Category</option>
+      <option value="concert">Concert</option>
+      <option value="travel">Travel</option>
+      <option value="sports">Sports</option>
+      <option value="theater">Theater</option>
+      <option value="festival">Festival</option>
+    </select>
+    <button type="submit" class="search-button" aria-label="Search tickets">Search</button>
+  </form>
+
+  <section class="featured-section" aria-label="Featured destinations and events">
+    <h2 class="section-title">Popular Destinations & Events</h2>
+    <div class="destinations-grid">
+      <article class="destination-card" tabindex="0" role="button" aria-pressed="false" aria-label="New York City, Concerts">
+        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=400&q=80" alt="New York City skyline" class="destination-img" />
+        <div class="destination-info">
+          <h3 class="destination-name">New York City</h3>
+          <p class="destination-desc">Experience world-class concerts and vibrant nightlife.</p>
+        </div>
+      </article>
+
+      <article class="destination-card" tabindex="0" role="button" aria-pressed="false" aria-label="Paris, Theater and Festival">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80" alt="Paris cityscape" class="destination-img" />
+        <div class="destination-info">
+          <h3 class="destination-name">Paris</h3>
+          <p class="destination-desc">Discover exquisite theater shows and cultural festivals.</p>
+        </div>
+      </article>
+
+      <article class="destination-card" tabindex="0" role="button" aria-pressed="false" aria-label="Tokyo, Sports and Travel">
+        <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&w=400&q=80" alt="Tokyo city at night" class="destination-img" />
+        <div class="destination-info">
+          <h3 class="destination-name">Tokyo</h3>
+          <p class="destination-desc">Book tickets for sports events and exciting travel adventures.</p>
+        </div>
+      </article>
+
+      <article class="destination-card" tabindex="0" role="button" aria-pressed="false" aria-label="London, Festivals and Concerts">
+        <img src="https://images.unsplash.com/photo-1486308510493-cb94e2f99a55?auto=format&fit=crop&w=400&q=80" alt="London bridge at dusk" class="destination-img" />
+        <div class="destination-info">
+          <h3 class="destination-name">London</h3>
+          <p class="destination-desc">Join popular festivals and live concerts in the city.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2024 Rovyn &mdash; All rights reserved.
+</footer>
+
+<script>
+// Set minimum date of date input to today
+const dateInput = document.querySelector('input[type="date"]');
+const today = new Date().toISOString().split('T')[0];
+dateInput.setAttribute('min', today);
+
+const searchForm = document.getElementById('searchForm');
+
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(searchForm);
+  const destination = formData.get('destination').trim();
+  const date = formData.get('date');
+  const category = formData.get('category');
+
+  if (!destination || !date || !category) {
+    alert('Please fill out all search fields.');
+    return;
+  }
+  alert(`Searching tickets for:\nDestination/Event: ${destination}\nDate: ${date}\nCategory: ${category}`);
+});
+</script>
+</body>
+</html>
+
